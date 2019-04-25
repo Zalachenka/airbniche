@@ -1,20 +1,26 @@
 require 'faker'
 Dog.destroy_all
+City.destroy_all
 DogSitter.destroy_all
 Stroll.destroy_all
 
 10.times do
-	dogs = Dog.create!(name: Faker::FunnyName.name)
+	city = City.create!(city_name: Faker::Nation.capital_city)
+end
+puts "10 cities generated"
+
+10.times do
+	dogs = Dog.create!(name: Faker::FunnyName.name, city_id: City.all.sample.id)
 end
 puts "10 fake dogs created"
 
 10.times do
-	sitters = DogSitter.create!(name: Faker::Name.name)
+	sitters = DogSitter.create!(name: Faker::Name.name, city_id: City.all.sample.id)
 end
 puts "10 fake sitters created"
 
 10.times do
-	stroll = Stroll.create!(dog_id: Dog.all.sample.id, dog_sitter_id: DogSitter.all.sample.id)
+	stroll = Stroll.create!(dog_id: Dog.all.sample.id, dog_sitter_id: DogSitter.all.sample.id, city_id: City.all.sample.id)
 end
 puts "10 fake strolls created"
 
